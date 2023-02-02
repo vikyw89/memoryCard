@@ -2,6 +2,14 @@
 
 live preview : 
 
+### behind the scene story :
+
+1. we populate random images using free API
+2. images are placed in a grid with 1 aspect ratio, eg: 1x1, 2x2, 3x3, 4x4, and so on with more # of cards as the game progresses
+3. score tally and best score on top right of the screen, saved into local storage
+4. everytime user click, the card will shuffle, and get redisplayed and user cannot click the same card
+5. when all card has been clicked, new sets of images will be generated based on the grid sizing, eg: 4 x 4 grid, will generate images to fill 5 x 5 grid
+
 <section id="assignment">
   <h3><a href="#assignment" class="anchor-link">Assignment</a></h3>
 

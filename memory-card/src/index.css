@@ -1,0 +1,23 @@
+/* CSS RESET */
+* {
+  margin: 0px;
+  padding: 0px;
+  box-sizing: border-box;
+}
+
+/* VARIABLES */
+:root {
+  --darkreader-neutral-background: #131516;
+  --darkreader-neutral-text: #d8d4cf;
+  --darkreader-selection-background: #004daa;
+  --darkreader-selection-text: #e8e6e3;
+  --card-container-col:5;
+}
+
+/* 100% HEIGHT */
+html, body, #root {
+  height: 100%;
+  background-color: var(--darkreader-neutral-background);
+  color: var(--darkreader-neutral-text);
+  font-family: Roboto, 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
