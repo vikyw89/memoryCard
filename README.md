@@ -6,8 +6,7 @@ live preview : https://vikyw89.github.io/memoryCard/
 
 1. we populate random images using free API
 2. score tally and best score on top of the screen, saved into local storage
-3. everytime user click, the card will shuffle, and get redisplayed and user cannot click the same card
-4. when all card has been clicked, new sets of images will be generated based on the grid sizing, eg: 4 x 4 grid, will generate images to fill 5 x 5 grid
+3. everytime user click, the will be added, shuffled, and get redisplayed and user cannot click the same card
 
 <section id="assignment">
   <h3><a href="#assignment" class="anchor-link">Assignment</a></h3>
