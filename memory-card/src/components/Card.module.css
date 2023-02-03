@@ -1,4 +1,11 @@
 .container {
-    padding: 10px;
-    outline:1px solid red;
+    border-radius: 20px;
+}
+
+.container > img {
+    max-width: 100%;
+    max-height: max-content;
+    aspect-ratio: 1;
+    border: 10px solid rgb(0, 0, 0);
+    border-radius: 100px;
 }

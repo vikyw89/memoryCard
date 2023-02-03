@@ -1,44 +1,61 @@
-import { useEffect, useState } from 'react'
+import { useEffect, useState, useRef } from 'react'
 import styles from './App.module.css'
 import { Card } from './components/Card'
-import { getRandomImagesURL } from './modules/getRandomImagesURL'
+import { getRandomCat, getRandomImagesURL } from './modules/getRandomCat'
+import { catStorage, setCatStorage } from './modules/localStorage'
+import { randomizeArray } from './modules/randomizeArray'
+import loadingGIF from './assets/loading.gif'
 
 function App() {
-  const [record, setRecord] = useState({score:0, bestScore:0})
+  const [record, setRecord] = useState({score:0, bestScore:localStorage.getItem('bestScore') ?? 0})
+  const [data, setData] = useState([])
+  const [loading, setLoading] = useState(true)
   const {score, bestScore} = record
-  const [data, setData] = useState(new Set())
+  const [collection, setCollection] = useState(localStorage.getItem('collection') ?? [])
 
   useEffect(()=>{
-    const availableCard = data.size - score
-    if (availableCard === 0) {
-      setTimeout(async()=>{
-        const randomImageURL = await getRandomImagesURL(100)
-        const newCard = {
-          imageURL: randomImageURL,
-          isClicked: false
+    localStorage.setItem('bestScore', record.bestScore)
+    setTimeout(async()=>{
+      const newURLS = await getRandomCat(1)
+      newURLS.forEach(newURL=>{
+        const newData = {
+          imageURL:newURL,
+          isClicked:false
         }
-        setData(data.add(newCard))
+        setData(randomizeArray(data.concat(newData)))
       })
-    }
-  })
+      setLoading(false)
+    })
+  },[record])
   const displayData = [...data]
   return (
     <div className={styles.container}>
       <div className={styles.header}>
-        Memory Card
+        Find the new CAT !
+      </div>
+      <div className={styles.stats}>
+        <div>Current Score :{score}</div>
+        <div>Best Score :{bestScore}</div>
       </div>
       <div className={styles.main}>
-        <div className={styles.stats}>
-          <div>Current Score :{score}</div>
-          <div>Best Score :{bestScore}</div>
-        </div>
-        <div className={styles.cardContainer}>
-          {
-          displayData.map((item,index)=>{
-            return <Card key={index} card={item} data={data} setData={setData}/>
-          })
-          }
-        </div>
+        {
+          loading ? (
+            <img src={loadingGIF} />
+          ) : (
+            <div className={styles.cardContainer}>
+            {
+            displayData.map((item,index)=>{
+              return <Card key={index} index={index} card={item} data={data} setData={setData} record={record} setRecord={setRecord} setLoading={setLoading} collection={collection} setCollection={setCollection}/>
+            })
+            }
+            </div>
+          )
+        }
+      </div>
+      <div className={styles.collection}>
+        {
+
+        }
       </div>
       <div className={styles.footer}>
         Made by Viky for The Odin Project 2023
